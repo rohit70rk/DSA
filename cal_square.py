@@ -1,2 +1,2 @@
-a = int(input("Enter number to find Square : "))
+a = int(input("Enter Number to Find Square : "))
 print(f"Square of {a} is : {a * a}")
