@@ -11,17 +11,21 @@ def cal(num1,num2,operator):
         mul = num1 * num2
         return mul
     
-    elif operator == "/":
-        div = num1 / num2
-        return div
+    try:
+        if operator == "/":
+            div = num1 / num2
+            return div
 
-    elif operator == "//":
-        rem = num1 // num2
-        return rem
+        if operator == "//":
+            rem = num1 // num2
+            return rem
+        
+    except ZeroDivisionError:
+        print("You can't divide by zero!")
 
     else :
-        print("invalid input")
+        return "invalid input"
 
 
-cal = cal(3,2,"//")
+cal = cal(3,0,"-")
 print(cal)
