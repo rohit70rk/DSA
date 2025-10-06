@@ -43,8 +43,8 @@ with open(output_file, "w", encoding="utf-8") as out:
                 continue
 
             # Write header and content into project.txt
-            out.write(f"\n#{relpath}\n")
+            out.write(f"\n\n#{relpath}\n\n")
             out.write(content)
-            out.write("\n")  # ensure separation
+            out.write("\n\n")  # ensure separation
 
-            
+print("Project files have been collected into project.txt")
