@@ -9,6 +9,7 @@ output_file = "project.txt"
 # Explicit files to exclude
 excluded_files = {
     "Rohit_CSE_VII_2022-26.pdf",
+    "profile_photo.jpeg",
     "requirements.txt",
     ".DS_Store",
     ".gitignore",
