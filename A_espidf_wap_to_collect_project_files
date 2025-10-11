@@ -1,0 +1,57 @@
+import os
+
+# Absolute path to your project
+root_dir = "/Users/rohitkumar/Developer/learning/robotics/espidf"
+
+# Output file will be created in the current working directory (DSA folder)
+output_file = "/Users/rohitkumar/Developer/learning/robotics/espidf/project.txt"
+
+# Explicit files to exclude
+excluded_files = {
+    "project.txt",
+    ".DS_Store",
+    ".gitignore",
+    "CMakeLists.txt",
+    "sdkconfig.adafruit_feather_esp32s2",
+    "sdkconfig.seeed_xiao_esp32s3",
+    
+}
+
+# Directories to exclude
+excluded_dirs = {
+    ".pio",
+    ".vscode",
+    "esp-idf",
+    "include",
+    "lib",
+    "test",
+    
+}
+
+with open(output_file, "w", encoding="utf-8") as out:
+    for foldername, subfolders, filenames in os.walk(root_dir):
+        # Skip excluded directories (in place modification of subfolders avoids descending into them)
+        subfolders[:] = [d for d in subfolders if d not in excluded_dirs]
+
+        for filename in filenames:
+            # Skip excluded files and extensions
+            if (filename in excluded_files):
+                continue
+
+            filepath = os.path.join(foldername, filename)
+            relpath = os.path.relpath(filepath, root_dir)  # relative path for header
+
+            try:
+                # Open file in read-only mode
+                with open(filepath, "r", encoding="utf-8") as f:
+                    content = f.read()
+            except Exception as e:
+                print(f"Skipping {filepath} (error: {e})")
+                continue
+
+            # Write header and content into project.txt
+            out.write(f"\n\n#{relpath}\n\n")
+            out.write(content)
+            out.write("\n\n")  # ensure separation
+
+print("Project files have been collected into project.txt")
